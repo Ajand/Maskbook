@@ -22,31 +22,6 @@ const useStyles = makeStyles()((theme) => ({
         width: 535,
         margin: '24px auto',
     },
-    abstractTabWrapper: {
-        width: '100%',
-        paddingTop: theme.spacing(1),
-        paddingBottom: theme.spacing(2),
-    },
-    tab: {
-        height: 36,
-        minHeight: 36,
-    },
-    tabPaper: {
-        backgroundColor: 'inherit',
-    },
-    tabs: {
-        width: 535,
-        height: 36,
-        minHeight: 36,
-        margin: '0 auto',
-        borderRadius: 4,
-    },
-    indicator: {
-        display: 'none',
-    },
-    tabPanel: {
-        marginTop: theme.spacing(3),
-    },
     content: {
         paddingTop: 0,
         '&::-webkit-scrollbar': {
@@ -56,6 +31,10 @@ const useStyles = makeStyles()((theme) => ({
     tradeRoot: {
         width: 535,
         margin: 'auto',
+    },
+    networkTab: {
+        width: 535,
+        margin: theme.spacing(1, 2, 'auto'),
     },
 }))
 
@@ -110,14 +89,12 @@ export function TraderDialog({ open, onClose }: TraderDialogProps) {
                                 <WalletStatusBox />
                             </div>
                         ) : null}
-                        <div className={classes.abstractTabWrapper}>
-                            <NetworkTab
-                                chainId={chainId}
-                                setChainId={setChainId}
-                                classes={classes}
-                                chains={chainIdList}
-                            />
-                        </div>
+                        <NetworkTab
+                            chainId={chainId}
+                            setChainId={setChainId}
+                            className={classes.networkTab}
+                            chains={chainIdList}
+                        />
                         <Trader {...traderProps} chainId={chainId} classes={{ root: classes.tradeRoot }} />
                     </DialogContent>
                 </InjectedDialog>
