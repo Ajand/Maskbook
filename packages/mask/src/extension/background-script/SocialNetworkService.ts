@@ -1,6 +1,11 @@
-import { definedSocialNetworkUIs, getNetworkWorker, loadSocialNetworkUI } from '../../social-network'
+import {
+    definedSocialNetworkUIs,
+    getNetworkWorker,
+    loadSocialNetworkUI,
+    loadSocialNetworkUIs,
+} from '../../social-network'
 import { Flags } from '../../../shared'
-import { requestSNSAdaptorPermission } from '../../social-network/utils/permissions'
+import { requestSNSAdaptorPermission, requestSNSAdaptorsPermission } from '../../social-network/utils/permissions'
 
 import { currentSetupGuideStatus } from '../../settings/settings'
 import stringify from 'json-stable-stringify'
@@ -15,6 +20,20 @@ export async function getDefinedSocialNetworkUIs() {
         }
     })
 }
+
+export async function setupSocialNetwork() {
+    const ui = await loadSocialNetworkUI('twitter.com')
+    const home = ui.utils.getHomePage?.()
+
+    const uis = await loadSocialNetworkUIs()
+    if (!Flags.no_web_extension_dynamic_permission_request) {
+        if (!(await requestSNSAdaptorsPermission(uis))) return
+    }
+
+    await delay(100)
+    home && browser.tabs.create({ active: true, url: home })
+}
+
 export async function connectSocialNetwork(
     identifier: PersonaIdentifier,
     network: string,
