@@ -1,4 +1,3 @@
-import { GearSettingsIcon } from '@masknet/icons'
 import {
     createInjectHooksRenderer,
     PluginId,
@@ -145,16 +144,7 @@ export function ProfileTabContent(props: ProfileTabContentProps) {
         <div className={classes.root}>
             <div>
                 {tabs.length ? (
-                    <ConcealableTabs<string>
-                        tabs={tabs}
-                        selectedId={selectedTabId}
-                        onChange={setSelectedTab}
-                        tail={
-                            <Box display="flex" justifyContent="center" alignItems="center" height="35px" width="35px">
-                                <GearSettingsIcon />
-                            </Box>
-                        }
-                    />
+                    <ConcealableTabs<string> tabs={tabs} selectedId={selectedTabId} onChange={setSelectedTab} />
                 ) : (
                     <Typography variant="body2" color="textPrimary" align="center" sx={{ paddingTop: 8 }}>
                         {t('web3_tab_hint')}
