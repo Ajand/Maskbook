@@ -2,6 +2,7 @@ import { LeftArrowIcon, RightArrowIcon } from '@masknet/icons'
 import { makeStyles } from '@masknet/theme'
 import { Button } from '@mui/material'
 import classnames from 'classnames'
+import { throttle } from 'lodash-unified'
 import { HTMLProps, ReactNode, useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react'
 
 const TAB_WIDTH = 126
@@ -133,13 +134,13 @@ export function ConcealableTabs<T extends number | string>({
         const isWider = tabList.scrollWidth > tabList.offsetWidth
         setOverflow(isWider)
 
-        const detectScrollStatus = () => {
+        const detectScrollStatus = throttle(() => {
             if (!isWider) return
             const reachedRight = tabList.scrollWidth - tabList.offsetWidth <= tabList.scrollLeft
             const reachedLeft = tabList.scrollLeft === 0
             setReachedRightEdge(reachedRight)
             setReachedLeftEdge(reachedLeft)
-        }
+        })
 
         detectScrollStatus()
         tabList.addEventListener('scroll', detectScrollStatus)
