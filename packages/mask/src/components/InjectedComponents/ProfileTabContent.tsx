@@ -32,8 +32,6 @@ function getTabContent(tabId: string) {
 
 const useStyles = makeStyles()((theme) => ({
     root: {},
-    tags: {},
-    metadata: {},
     content: {
         position: 'relative',
         padding: theme.spacing(1),
@@ -145,7 +143,7 @@ export function ProfileTabContent(props: ProfileTabContentProps) {
 
     return (
         <div className={classes.root}>
-            <div className={classes.tags}>
+            <div>
                 {tabs.length ? (
                     <ConcealableTabs<string>
                         tabs={tabs}
