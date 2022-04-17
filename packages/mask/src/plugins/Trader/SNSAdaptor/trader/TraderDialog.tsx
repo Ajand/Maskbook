@@ -20,7 +20,7 @@ import { isDashboardPage } from '@masknet/shared-base'
 const useStyles = makeStyles()((theme) => ({
     walletStatusBox: {
         width: 535,
-        margin: '24px auto',
+        margin: theme.spacing(3, 'auto'),
     },
     content: {
         paddingTop: 0,
@@ -34,7 +34,7 @@ const useStyles = makeStyles()((theme) => ({
     },
     networkTab: {
         width: 535,
-        margin: theme.spacing(1, 2, 'auto'),
+        margin: theme.spacing(1, 'auto', 2),
     },
 }))
 

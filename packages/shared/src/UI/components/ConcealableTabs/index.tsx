@@ -134,13 +134,13 @@ export function ConcealableTabs<T extends number | string>({
         const isWider = tabList.scrollWidth > tabList.offsetWidth
         setOverflow(isWider)
 
+        if (!isWider) return
         const detectScrollStatus = throttle(() => {
-            if (!isWider) return
             const reachedRight = tabList.scrollWidth - tabList.offsetWidth <= tabList.scrollLeft
             const reachedLeft = tabList.scrollLeft === 0
             setReachedRightEdge(reachedRight)
             setReachedLeftEdge(reachedLeft)
-        })
+        }, 100)
 
         detectScrollStatus()
         tabList.addEventListener('scroll', detectScrollStatus)
@@ -188,18 +188,18 @@ export function ConcealableTabs<T extends number | string>({
                             <Button
                                 disableRipple
                                 className={classnames(classes.normal, classes.controller)}
-                                disabled={reachedRightEdge}
+                                disabled={reachedLeftEdge}
                                 onClick={() => {
-                                    slide(true)
+                                    slide(false)
                                 }}>
                                 <LeftArrowIcon color="inherit" />
                             </Button>
                             <Button
                                 disableRipple
-                                disabled={reachedLeftEdge}
+                                disabled={reachedRightEdge}
                                 className={classnames(classes.normal, classes.controller)}
                                 onClick={() => {
-                                    slide(false)
+                                    slide(true)
                                 }}>
                                 <RightArrowIcon color="inherit" />
                             </Button>

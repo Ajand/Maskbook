@@ -33,7 +33,7 @@ const useStyles = makeStyles()((theme) => ({
     root: {},
     content: {
         position: 'relative',
-        padding: theme.spacing(1),
+        padding: theme.spacing(2),
     },
 }))
 
